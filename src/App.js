@@ -1,10 +1,10 @@
-
+import Soccer from './soccer/SoccerItem';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-     <h1>hello</h1>
+      <Soccer />
     </div>
   );
 }
