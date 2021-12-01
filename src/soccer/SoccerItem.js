@@ -1,8 +1,9 @@
 import React from 'react'
+import './Soccer.css'
 
 const Soccer = () =>{
     return(
-        <div className="soocer">
+        <div className="soccer">
             <div className="soccer__title-box">
                 <p>Local</p>
                 <p>45</p>

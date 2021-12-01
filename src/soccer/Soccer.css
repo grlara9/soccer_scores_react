@@ -1,0 +1,28 @@
+.soccer{
+    width: 50%;
+    background-color: #272727;
+    color: #e6e6e6;
+    padding: 12px;
+    position:absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+}
+
+.soccer__title-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 18px 0;
+    font-size: 1.4rem;
+}
+.team{
+    width: 200px;
+}
+.team img{
+    height: 50px;
+    width: 50px;
+    
+}
