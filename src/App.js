@@ -13,12 +13,11 @@ useEffect(() => {
     const {data} = await axios({
      
        method: 'get',
-       url: 'https://v3.football.api-sports.io/fixtures?live=all',
+       url: 'https://api.football-data.org/v2/matches'
+       ,
        headers: {
-         'x-rapidapi-host': 'v3.football.api-sports.io',
-         'x-rapidapi-key': '4c092769ed4424412311fbff39a27aa8',
-         
-     }
+        'X-Auth-Token': '7092f96c5dd94b4195e4ba77b0bbf7da'
+        }
      })
      
      setGames(data)
@@ -31,7 +30,7 @@ useEffect(() => {
   
   return (
     <div className="App">
-      <Soccer />
+      <Soccer games={games}/>
     </div>
   );
 }
