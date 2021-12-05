@@ -1,7 +1,7 @@
 import React from 'react'
 import './Soccer.css'
 
-const Soccer = () =>{
+const Soccer = ({}) =>{
     return(
         <div className="soccer">
             <div className="soccer__title-box">

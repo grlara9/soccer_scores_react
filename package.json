@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
@@ -35,6 +36,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }, 
-  "proxy" : "https://v3.football.api-sports.io/fixtures?live=all"
+  },
+  "proxy": "https://v3.football.api-sports.io/fixtures?live=all"
 }
