@@ -7,6 +7,7 @@ import axios from 'axios'
 function App() {
 
   const [games, setGames] = useState([])
+  const [leagueCode, setLeagueCode] = useState('')
   console.log("This is game >>>", games)
 
 useEffect(() => {
@@ -30,13 +31,19 @@ useEffect(() => {
     getdata()
   }, [])  
 
-  
+  const onLegueChange = (event)=>{
+    const leagueCode = event.target.value;
+
+    console.log("SEEEE>>>", leagueCode)
+
+    setLeagueCode(leagueCode)
+  }
 
   
   return (
     <div className="App">
       <FloatingLabel controlId="floatingSelect" label="Works with selects">
-        <Form.Select aria-label="Floating label select example">
+        <Form.Select aria-label="Floating label select example" onChange={onLegueChange}>
           {games.map((leagues)=>(
             <option value={leagues.value}>{leagues.name}</option>
 
