@@ -9,7 +9,7 @@ function App() {
 
   const [games, setGames] = useState([])
   const [leagueCode, setLeagueCode] = useState('')
-  
+  const [data, setData] = useState([])
 
 // url: 'https://api.football-data.org/v2/competitions',
 //headers: {
@@ -36,7 +36,8 @@ useEffect(() => {
       const d = data.response;
       const leagues = d.map((league)=> ({
         name: league.league.name,
-        value:league.league.id
+        value:league.league.id,
+        logo: league.league.logo
      }))
      console.log("ASSDF>>>", leagues)
      let sortedData = sortData(leagues)
@@ -64,7 +65,8 @@ useEffect(() => {
     
     const {data} = await axios(config)
     console.log("Ahora siiii>>>", data)
-
+    setData(data)
+    console.log("all data passed", data)
   }
 
   
@@ -74,13 +76,14 @@ useEffect(() => {
       <FloatingLabel controlId="floatingSelect">
         <Form.Select aria-label="Floating label select example" onChange={onLegueChange}>
           {games.map((leagues)=>(
-            <option value={leagues.value}>{leagues.name}</option>
-
+            
+            <option value={leagues.value}> {leagues.name}</option>
+            
           ))}
           
         </Form.Select>
       </FloatingLabel>
-    <Soccer games={games}/>
+    <Soccer data={data}/>
     </div>
   );
 }
