@@ -10,6 +10,7 @@ function App() {
   const [games, setGames] = useState([])
   const [leagueCode, setLeagueCode] = useState('')
   const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
 // url: 'https://api.football-data.org/v2/competitions',
 //headers: {
@@ -62,11 +63,12 @@ useEffect(() => {
        "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8"
       }
     }
-    
+    setIsLoading(true)
     const {data} = await axios(config)
     console.log("Ahora siiii>>>", data)
     setData(data)
     console.log("all data passed", data)
+    setIsLoading(false)
   }
 
   
@@ -83,7 +85,7 @@ useEffect(() => {
           
         </Form.Select>
       </FloatingLabel>
-    <Soccer data={data}/>
+    <Soccer isLoading={isLoading} data={data}/>
     </div>
   );
 }
