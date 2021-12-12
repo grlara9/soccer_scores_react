@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Soccer from './soccer/SoccerItem';
+import StandingTable from './soccer/StandingTable';
 import {Form , FloatingLabel} from 'react-bootstrap'
 import './App.css';
 import axios from 'axios'
@@ -84,8 +85,10 @@ useEffect(() => {
           ))}
           
         </Form.Select>
+
       </FloatingLabel>
-    <Soccer isLoading={isLoading} data={data}/>
+    <Soccer />
+    <StandingTable  isLoading={isLoading} data={data}/>
     </div>
   );
 }
