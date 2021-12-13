@@ -34,16 +34,14 @@ useEffect(() => {
    }
 
    const {data} = await axios(config)
-    console.log("The data>>>>", data)
+    
       const d = data.response;
       const leagues = d.map((league)=> ({
         name: league.league.name,
         value:league.league.id,
         logo: league.league.logo
      }))
-     console.log("ASSDF>>>", leagues)
      let sortedData = sortData(leagues)
-     console.log("Sorted>>>", sortedData)
      setGames(sortedData)
     } 
   getdata()
@@ -66,9 +64,9 @@ useEffect(() => {
     }
     setIsLoading(true)
     const {data} = await axios(config)
-    console.log("Ahora siiii>>>", data)
-    setData(data)
-    console.log("all data passed", data)
+    const standing = data.response[0];
+    setData(standing)
+    console.log("all data passed", standing)
     setIsLoading(false)
   }
 
@@ -79,13 +77,9 @@ useEffect(() => {
       <FloatingLabel controlId="floatingSelect">
         <Form.Select aria-label="Floating label select example" onChange={onLegueChange}>
           {games.map((leagues)=>(
-            
             <option value={leagues.value}> {leagues.name}</option>
-            
           ))}
-          
         </Form.Select>
-
       </FloatingLabel>
     <Soccer />
     <StandingTable  isLoading={isLoading} data={data}/>

@@ -1,16 +1,16 @@
 import React from 'react'
+import StandingTable from './StandingTable'
 
 const Standings = ({data, isLoading}) =>{
+    
     return (
         <div>
             {isLoading && <h1>Loading...</h1>}
-            {data.map((standing)=>(
-               
+            {
                 <StandingTable 
-                
-                key={standing.league.id} 
-                standing={standing.response} />
-            ))}
+                    key={league.id} 
+                    data={data} />
+            }
         </div>
     )
 }

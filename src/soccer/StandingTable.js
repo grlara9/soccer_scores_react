@@ -1,10 +1,11 @@
 import React from 'react'
-
-const StandingTable = ({key, standing}) =>{
-    console.log("standing>>>>", key)
+import {Table} from 'react-bootstrap'
+const StandingTable = ({data}) =>{
     return(
         <div>
-            <h1>Table</h1>
+          <h1>{data.league.name}</h1>
+           
+          
             
         </div>
     )
