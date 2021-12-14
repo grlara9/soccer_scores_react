@@ -42,6 +42,7 @@ useEffect(() => {
         logo: league.league.logo
      }))
      let sortedData = sortData(leagues)
+     console.log("code", sortedData)
      setGames(sortedData)
     } 
   getdata()

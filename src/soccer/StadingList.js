@@ -9,7 +9,8 @@ const Standings = ({data, isLoading}) =>{
             {
                 <StandingTable 
                     key={league.id} 
-                    data={data} />
+                    data={data} 
+                 />
             }
         </div>
     )
