@@ -9,16 +9,16 @@ import { sortData } from './utils/utils';
 function App() {
 
   const [games, setGames] = useState([])
-  const [leagueCode, setLeagueCode] = useState('')
+  let [leagueCode, setLeagueCode] = useState([
+    {id: 262, name: 'Liga Mx'},
+    {id: 71, name: 'Serie A'},
+    {id:2, name:'UEFA Champions league'}
+  ])
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-// url: 'https://api.football-data.org/v2/competitions',
-//headers: {
-  //'X-Auth-Token': '7092f96c5dd94b4195e4ba77b0bbf7da'
-  //}
-
-
+  console.log("leaguecode>>>>>", leagueCode)
+ 
   //4c092769ed4424412311fbff39a27aa8	
 useEffect(() => {
   const getdata = async() =>{
@@ -48,40 +48,36 @@ useEffect(() => {
   getdata()
 }, [])  
 
-  const onLegueChange = async (event)=>{
+const handleSelection = (id, name) => {
+  fetchData(id, name);
+};
 
-    const leagueCode = event.target.value;
+const fetchData = async (id, name)=>{
 
-    setLeagueCode(leagueCode)
-    console.log("LUEGUECODE>>>", leagueCode)
 
-    const config = {
-      method: 'get',
-      url:`https://v3.football.api-sports.io/standings?league=${leagueCode}&season=2021`,
-      headers:{
-       "x-rapidapi-host": "v3.football.api-sports.io",
-       "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8"
-      }
+  const config = {
+    method: 'get',
+    url: `https://v3.football.api-sports.io/standings?league=${id}&season=2021`,
+    headers:{
+     "x-rapidapi-host": "v3.football.api-sports.io",
+     "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8"
     }
-    setIsLoading(true)
-    const {data} = await axios(config)
-    const standing = data.response[0];
-    setData(standing)
-    console.log("all data passed", standing)
-    setIsLoading(false)
   }
 
+  setIsLoading(true)
+  const {data} = await axios(config)
+  const standing = data.response[0];
+  setData(standing)
+  console.log("all data passed", standing)
+  setIsLoading(false)
+}
   
   return (
     <div className="App">
       <h1>Soccer Mania</h1>
-      <FloatingLabel controlId="floatingSelect">
-        <Form.Select aria-label="Floating label select example" onChange={onLegueChange}>
-          {games.map((leagues)=>(
-            <option value={leagues.value}> {leagues.name}</option>
-          ))}
-        </Form.Select>
-      </FloatingLabel>
+      {leagueCode.map(league => (
+          <button className="btn btn-primary mr-2 mt-2"  onClick={() => {handleSelection(league.id, league.name)}}>{league.name}</button>
+                        ))}
     <Soccer />
     <StandingTable  isLoading={isLoading} data={data}/>
     </div>

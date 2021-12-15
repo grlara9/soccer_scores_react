@@ -3,11 +3,12 @@ import {Table} from 'react-bootstrap'
 
 const StandingTable = ({data}) =>{
   console.log("si sirve",data)
-    return(
-        <div className="table">
+    return (data.length === 0) ? (
+      <h1>No result</h1>
+    ):(
+      <div className="table">
         
-        
-        <p>{data.league.country}</p>
+           <p>{data.league.country}</p>
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
@@ -42,9 +43,7 @@ const StandingTable = ({data}) =>{
           </tbody>
     ))}
     </Table>
-                   
-            
-        </div>
+            </div>       
     )
 }
 
