@@ -10,55 +10,20 @@ function App() {
 
   const [games, setGames] = useState([])
   let [leagueCode, setLeagueCode] = useState([
-    {id: 262, name: 'Liga Mx'},
-    {id:2, name:'UEFA Champions league'},
-    {id:31, name:'World Cup - Qualification CONCACAF'},
-    {id:39, name:'Premier League'},
-    {id:61, name:'Ligue 1'},
-    {id:71, name:'Serie A'},
-    {id:78, name:'Bundesliga 1'},
-    {id:94, name:'Primeira Liga'},
-    {id:140, name:'La Liga'}
+    {id: 262, name: 'Liga Mx', logo: "https://media.api-sports.io/football/leagues/262.png"},
+    {id:2, name:'UEFA Champions league', logo: "https://media.api-sports.io/football/leagues/2.png"},
+    {id:31, name:'World Cup - Qualification CONCACAF', logo: "https://media.api-sports.io/football/leagues/31.png"},
+    {id:39, name:'Premier League', logo: "https://media.api-sports.io/football/leagues/39.png"},
+    {id:61, name:'Ligue 1', logo: "https://media.api-sports.io/football/leagues/61.png"},
+    {id:71, name:'Serie A', logo: "https://media.api-sports.io/football/leagues/71.png"},
+    {id:78, name:'Bundesliga 1', logo: "https://media.api-sports.io/football/leagues/78.png"},
+    {id:94, name:'Primeira Liga', logo: "https://media.api-sports.io/football/leagues/94.png"},
+    {id:140, name:'La Liga', logo: "https://media.api-sports.io/football/leagues/140.png"}
   ])
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
- // console.log("leaguecode>>>>>", leagueCode)
- 
-  //4c092769ed4424412311fbff39a27aa8	
-  /*
-useEffect(() => {
-  const getdata = async() =>{
-    const config = {
-        method: 'get',
-        url:'https://v3.football.api-sports.io/leagues',
-        headers:{
-          "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8"
-      }
-    }
-    const {data} = await axios(config)
-    const d = data.response;
-      const leagues = d.map((league)=> ({
-        name: league.league.name,
-        value:league.league.id,
-        logo: league.league.logo
-     }))
-     let sortedData = sortData(leagues)
-     console.log("code", sortedData)
-     setGames(sortedData)
-    } 
-  getdata()
-}, [])  
-
-
-
-useEffect(()=>{
-  handleSelection(262)
-},[])
-
-*/
-const handleSelection = (id, name) => {
+ const handleSelection = (id, name) => {
   searchData(id, name);
 };
 
@@ -105,7 +70,7 @@ const fetchData = async ()=>{
     <div className="App">
       <h1>Soccer Mania</h1>
       {leagueCode.map(league => (
-          <button className="btn btn-primary mr-2 mt-2"  onClick={() => handleSelection(league.id, league.name)}>{league.name}</button>
+          <button onClick={() => handleSelection(league.id, league.name)}><img src={league.logo} alt="logo" height={50} width={50} /></button>
                         ))}
     <StandingLists  
      data={data}
