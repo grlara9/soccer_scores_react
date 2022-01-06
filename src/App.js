@@ -57,11 +57,11 @@ useEffect(()=>{
   handleSelection(262)
 },[])
 
+*/
 const handleSelection = (id, name) => {
-  fetchData(id, name);
+  searchData(id, name);
 };
 
-*/
 
 
 const fetchData = async ()=>{
@@ -73,22 +73,40 @@ const fetchData = async ()=>{
         "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8",
       }
     }
+      setIsLoading(true)
+      const {data} = await axios(config)
+      setData(data.response)
+      setIsLoading(false)
+    }
 
-  setIsLoading(true)
-  const {data} = await axios(config)
-  setData(data.response)
-  setIsLoading(false)
-}
+  useEffect(()=>{
+    fetchData()
+  },[])
 
-useEffect(()=>{
-  fetchData()
-},[])
   console.log("all data passed", data)
+
+  const searchData = async (id, name)=>{
+    const config = {
+      method: 'get',
+      url: `https://v3.football.api-sports.io/standings?league=${id}&season=2021`,
+      headers:{
+        "x-rapidapi-host": "v3.football.api-sports.io",
+        "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8",
+      }
+    }
+    setIsLoading(true)
+    const {data} = await axios(config)
+    setData(data.response)
+    setIsLoading(false)
+
+  }
   
   return (
     <div className="App">
       <h1>Soccer Mania</h1>
-     
+      {leagueCode.map(league => (
+          <button className="btn btn-primary mr-2 mt-2"  onClick={() => handleSelection(league.id, league.name)}>{league.name}</button>
+                        ))}
     <StandingLists  
      data={data}
     />
