@@ -1,14 +1,11 @@
 import React from 'react'
-import StandingTable from './StandingTable'
+import './StandingList.css'
 
 const StandingLists = props =>{
   
     return (
         <div>
-           
-            
-            {props.data.map((item, index)=>(
-                   
+           {props.data.map((item, index)=>(
                 <div className='table' key={index} >
                     <h2>{item.league.name}</h2>
                     <img src={item.league.logo} alt="logo"  height="50" width="50"/>
@@ -25,8 +22,6 @@ const StandingLists = props =>{
                             <th>PTS</th>
                           </tr>
                     {item.league.standings[0].map((items) => (
-                      
-                        
                         <tr>
                             <td>{items.rank}</td>
                             <td><img src={items.team.logo} height="30" width="30" />  {items.team.name}</td>
@@ -35,21 +30,13 @@ const StandingLists = props =>{
                             <td> {items.all.draw} </td>
                             <td> {items.all.lose} </td>
                             <td> {items.all.goals.for} - {items.all.goals.against} </td>
-                            
                             <td> {items.goalsDiff} </td>
                             <td> {items.points} </td>
                           </tr>
-                         
-                        
-                         ))}
-                         </table>
+                        ))}
+                    </table>
                 </div>
-            )
-            
-            )}
-           
-          
-  
+            ))}
         </div>
     )
 }
