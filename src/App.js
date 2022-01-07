@@ -21,6 +21,7 @@ function App() {
     {id:140, name:'La Liga', logo: "https://media.api-sports.io/football/leagues/140.png"}
   ])
   const [data, setData] = useState([])
+  const [live, setLive]= useState([])
   const [isLoading, setIsLoading] = useState(true)
 
  const handleSelection = (id, name) => {
@@ -48,7 +49,6 @@ const fetchData = async ()=>{
     fetchData()
   },[])
 
-  console.log("all data passed", data)
 
   const searchData = async (id, name)=>{
     const config = {
@@ -65,6 +65,26 @@ const fetchData = async ()=>{
     setIsLoading(false)
 
   }
+
+  const liveData = async() => {
+    const config = {
+      method: 'get',
+      url: 'https://v3.football.api-sports.io/fixtures?live=all',
+      headers:{
+        "x-rapidapi-host": "v3.football.api-sports.io",
+        "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8",
+      }
+    }
+    const {data} = await axios(config)
+    setLive(data.response)
+    console.log("Live data", live)
+  }
+
+  useEffect(()=>{
+    liveData()
+  },[])
+
+
   
   return (
     <div className="App">
