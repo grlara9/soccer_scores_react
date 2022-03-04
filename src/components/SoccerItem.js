@@ -35,4 +35,6 @@ const Soccer = ({data, name}) =>{
     )
 }
 
+
+
 export default Soccer

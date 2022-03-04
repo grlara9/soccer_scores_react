@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import Soccer from './soccer/SoccerItem';
-import StandingLists from './soccer/StadingList';
+import Soccer from './components/SoccerItem';
+import LiveScores from './components/LiveScores'
+import StandingLists from './components/StadingList';
 import {Form , FloatingLabel} from 'react-bootstrap'
 import './App.css';
 import axios from 'axios'
@@ -24,6 +25,7 @@ function App() {
   const [live, setLive]= useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+  console.log("This is live", live)
  const handleSelection = (id, name) => {
   searchData(id, name);
 };
@@ -33,7 +35,7 @@ function App() {
 const fetchData = async ()=>{
     const config = {
       method: 'get',
-      url: "https://v3.football.api-sports.io/standings?league=262&season=2021",
+      url: "https://v3.football.api-sports.io/standings?league=262&season=2021&from=2021-07-01&to=2021-12-31",
       headers:{
         "x-rapidapi-host": "v3.football.api-sports.io",
         "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8",
@@ -69,16 +71,22 @@ const fetchData = async ()=>{
   const liveData = async() => {
     const config = {
       method: 'get',
-      url: 'https://v3.football.api-sports.io/fixtures?live=all',
+      url:'https://v3.football.api-sports.io/fixtures?live=all',
       headers:{
         "x-rapidapi-host": "v3.football.api-sports.io",
         "x-rapidapi-key": "4c092769ed4424412311fbff39a27aa8",
       }
     }
     const {data} = await axios(config)
+
+    if (!{data} || {data}.length === 0) {
+
+      console.log('Something went wrong');
+      return
+    }
     setLive(data.response)
-    console.log("Live data", live)
   }
+ 
 
   useEffect(()=>{
     liveData()
@@ -94,7 +102,10 @@ const fetchData = async ()=>{
                         ))}
     <StandingLists  
      data={data}
+    
     />
+
+    <LiveScores live={live}/>
     </div>
   );
 }
